@@ -7,9 +7,9 @@ import qutip as qu
 
 def bloch_spherical_coords(state: qu.Qobj) -> Tuple[float, float, float]:
     """
-    Compute Bloch spherical coordinates (r, ) on any quantum state.
+    Compute Bloch spherical coordinates (r, θ, ϕ) on any quantum state.
 
-    Uses only the first two amplivector (x, y, ztudes, reflecting leakage as a shortening of the vector.
+    Uses only the first two amplitudes, reflecting leakage as a shortening of the radius.
     """
     a = state[0, 0]
     b = state[1, 0]
