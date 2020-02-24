@@ -1,0 +1,10 @@
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.8
+  - ipykernel
+  - jupyterlab-plotly-extension
+  - matplotlib
+  - plotly
+  - qutip
