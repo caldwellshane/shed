@@ -9,5 +9,5 @@ $ conda env create -n shed -f <shed-directory>/conda-env.yml
 ```
 We then make an editable install of `shed`, ie.
 ```
-$ pip install -e <shed-directory>
+$ pip install --no-deps -e <shed-directory>
 ```

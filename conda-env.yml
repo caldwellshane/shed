@@ -1,10 +1,14 @@
 channels:
   - defaults
   - conda-forge
+  - plotly
 dependencies:
   - python=3.8
   - ipykernel
   - jupyterlab-plotly-extension
   - matplotlib
   - plotly
+  - plotly-orca
+  - psutil
   - qutip
+  - requests

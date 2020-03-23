@@ -1,7 +1,38 @@
 import numpy as np
 import qutip as qu
 
-from shed.hamiltonians import transmon_hamiltonian
+from shed.hamiltonians import qubit_hamiltonian, transmon_hamiltonian
+
+
+def evolve_xy_driven_qubit(
+    time_points: np.ndarray,
+    qubit_freq: float,
+    rabi_freq: float,
+    drive_freq: float,
+    drive_phase: float = 0
+) -> qu.solver.Result:
+    """
+    Time-evolve a qubit under an XY drive.
+
+    :param time_points: Times at which to capture the wavefunction.
+    :param qubit_freq: Qubit frequency. Set to zero to be in the rotating frame.
+    :param rabi_freq: Frequency of Rabi oscillations.
+    :param drive_freq: Frequency of qubit drive.
+    :param drive_phase: Phase of qubit drive, relative to qubit phase which is zero.
+    :return: A ``Result`` containing the sampled wavefunctions in the ``states`` attribute.
+    """
+    H0 = qubit_hamiltonian(qubit_freq)
+    H1 = rabi_freq * qu.sigmay()
+    H = [
+        2 * np.pi * H0,
+        [
+            2 * np.pi * H1,
+            f"cos({2 * np.pi * drive_freq} * t + {2 * np.pi * drive_phase})"
+        ]
+    ]
+
+    # Evolve state per Schrodinger equation
+    return qu.mesolve(H, qu.basis(2, 0), time_points)
 
 
 def simulate_pi_pulse(
